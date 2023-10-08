@@ -1,0 +1,266 @@
+:root {
+  --soft-orange: hsl(35, 77%, 62%);
+  --soft-red: hsl(5, 85%, 63%);
+  --off-white: hsl(36, 100%, 99%);
+  --grayish-blue: hsl(233, 8%, 79%);
+  --dark-grayish-blue: hsl(236, 13%, 42%);
+  --very-dark-blue: hsl(240, 100%, 5%);
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/Inter.ttf");
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 150px 1fr 1fr;
+  grid-template-areas:
+    ". nav ."
+    ". hero ."
+    ". articles .";
+  font-family: "Inter";
+  background-color: var(--off-white);
+  user-select: none;
+
+  .desktopMenu {
+    grid-area: nav;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    ul {
+      display: flex;
+      list-style: none;
+
+      li {
+        font-size: 15px;
+        font-weight: 400;
+        color: var(--very-dark-blue);
+        margin-left: 50px;
+        transition: 200ms ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          color: var(--soft-orange);
+        }
+      }
+    }
+  }
+
+  .mobileMenu {
+    display: none;
+  }
+}
+
+.hero {
+  grid-area: hero;
+  display: grid;
+  grid-template-columns: 31% 31% 31%;
+  grid-template-rows: 300px 240px;
+  justify-content: space-between;
+  grid-template-areas:
+    "image image news"
+    "heading description news"
+  ;
+
+  .desktopImage {
+    grid-area: image;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mobileImage {
+    display: none;
+  }
+
+  h1 {
+    grid-area: heading;
+    font-weight: 800;
+    font-size: 58px;
+    color: var(--very-dark-blue);
+    margin: 0;
+    margin-top: 30px;
+  }
+
+  .heroDescription {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    p {
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 150%;
+      color: var(--dark-grayish-blue);
+    }
+
+    button {
+      width: 50%;
+      height: 50px;
+      border: none;
+      background-color: var(--soft-red);
+      font-family: "Inter";
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--off-white);
+      transition: 200ms ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        background-color: var(--very-dark-blue);
+      }
+    }
+  }
+
+  .news {
+    grid-area: news;
+    background-color: var(--very-dark-blue);
+    padding: 10px 40px 10px 30px;
+
+    h2 {
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--soft-orange);
+    }
+
+    h3 {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--off-white);
+      transition: 200ms ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        color: var(--soft-orange);
+      }
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--grayish-blue);
+    }
+
+    hr {
+      border: 1px solid var(--grayish-blue);
+      margin: 30px 0px 30px 0px;
+    }
+  }
+}
+
+.topArticles {
+  grid-area: articles;
+  display: grid;
+  grid-template-columns: 31% 31% 31%;
+  grid-template-rows: 100px;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 1390px) {
+  .App {
+    grid-template-columns: 2.5% 95% 2.5%;
+    grid-template-rows: 100px 1fr 1fr;
+
+    .desktopMenu {
+      display: none;
+    }
+
+    .mobileMenu {
+      grid-area: nav;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        border: none;
+        background-color: transparent;
+      }
+
+      span {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        background-color: var(--off-white);
+
+        button {
+          align-self: flex-end;
+          margin-top: 30px;
+          margin-right: 10px;
+        }
+
+        ul {
+          list-style: none;
+          margin-top: 200px;
+          padding: 20px;
+
+          li {
+            margin-bottom: 30px;
+          }
+        }
+      }
+
+      .overlay {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: black;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  .hero {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "image"
+      "heading"
+      "description"
+      "news"
+    ;
+
+    .desktopImage {
+      display: none;
+    }
+
+    .mobileImage {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 42px;
+    }
+
+    .news {
+      padding-bottom: 20px;
+      margin-top: 50px;
+    }
+  }
+
+  .topArticles {
+    grid-template-columns: 100%;
+    grid-template-rows: 200px 200px 200px;
+  }
+}
